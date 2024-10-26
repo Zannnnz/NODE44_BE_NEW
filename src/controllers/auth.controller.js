@@ -26,9 +26,13 @@ const register = async(req,res,next) => {
             email:email,
          }
       });
+
+      console.log("userExits", userExits)
+
       if(userExits){
          return res.status(400).json({message:"Already account"})
       }
+
       const secret = speakeasy.generateSecret({length:15});
       //B3: thêm người mới vào
       // const newAccount  = await model.users.create({
@@ -48,7 +52,7 @@ const register = async(req,res,next) => {
       });
       // cấu hình info email
       const mailOption = {
-         from:'nguyennhoanhthai@gmail.com',
+         from:'nguyenvovanio55@gmail.com',
          to: email,
          subject:"Welcome to our service",
          text:`Hello ${fullName} .Best Regards.`

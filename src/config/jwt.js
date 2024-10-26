@@ -16,7 +16,7 @@ dotenv.config();
 export const createToken = (data) => {
   return jwt.sign({payload:data},process.env.ACCESS_TOKEN_KEY,{
    algorithm: "HS256",
-   expiresIn: "5m"
+   expiresIn: "1d"
   })
 }
 
@@ -24,7 +24,7 @@ export const createToken = (data) => {
 export const createTokenAsyncKey = (data) => {
    return jwt.sign({payload:data},accessTokenPrivateKey,{
       algorithm: "RS256",
-      expiresIn: "5m"
+      expiresIn: "1d"
      })
 };
 
@@ -55,14 +55,14 @@ export const verifyTokenAsyncKey = (token) =>{
 export const createRefToken = (data) => {
    return jwt.sign({payload:data},process.env.REFESH_SECRET,{
       algorithm: "HS256",
-      expiresIn: "7d"
+      expiresIn: "1d"
      })
 }
 
 export const createRefTokenAsyncKey = (data) => {
    return jwt.sign({payload:data},refreshTokenPrivateKey,{
       algorithm: "RS256",
-      expiresIn: "10s"
+      expiresIn: "1d"
      })
 }
 

@@ -91,6 +91,32 @@ const getVideo = async (req,res) => {
    }
 }
 
+const uploadVideo = async (req,res) => {
+   try {
+      let file = req.file;
+      let videoID= 1;
+
+      console.log("file", file)
+      let video = await model.video.findOne({
+         where:{
+            video_id:videoID
+         }
+      })
+
+
+      if(!video){
+         return res.status(404).json({message: "Video not found"});
+      }
+      let avatarPath = `/public/imgs/${file.filename}`;
+      video.avatar=avatarPath || video.avatar;
+      await video.save();
+
+      return res.status(200).json({message: "Video updated successfully",data:avatarPath});
+
+   } catch (error) {
+      return res.status(500).json({message:"error api upload video"});
+   }
+}
 
 export{
    getListVideo,
@@ -98,4 +124,5 @@ export{
    getTyppeDetails,
    getVideoPage,
    getVideo,
+   uploadVideo
 }
